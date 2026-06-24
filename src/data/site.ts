@@ -5,10 +5,10 @@ export const site = {
   },
   location: "Pune, India",
   tagline:
-    "Designing graphic and digital experiences that ease, beautify, and delight moments in life.",
+    "",
   bio: "I'm a full-stack developer from Pune, India ✦ Four years in, and I still get that rush when an idea becomes something real. I live where design, engineering, and DevOps meet — building products that feel human, not just functional 💛 I sweat the small stuff: the transition, the typo, the moment someone smiles because it just works ✨ Always asking why. Always shipping with care 🚀",
   email: "melvinfernando175@gmail.com",
-  copyright: "© 2016–2026 Melvin Fernando.",
+  copyright: "",
   resume: "#",
 };
 
@@ -196,40 +196,43 @@ export const socialLinks = [
 
 export const qaItems = [
   {
+    question: "What's your approach when starting a new product from scratch?",
+    answer:
+      "I start with the user's most uncomfortable moment — the thing that makes them close the tab or sigh. Then I work backwards. Most mistakes happen when teams jump into building before they've felt the friction themselves. I prototype rough, validate fast, and only invest in polish once the direction is real.",
+  },
+  {
+    question: "How do you balance design and engineering when they conflict?",
+    answer:
+      "I don't think they actually conflict as often as people say — they conflict when design skips constraints and engineering skips empathy. Since I do both, I usually know which side is being lazy. The real tension is timeline vs. quality, and there I always try to protect the user experience first, then negotiate scope.",
+  },
+  {
+    question: "What's your go-to stack when you're building something yourself?",
+    answer:
+      "Next.js, TypeScript, Tailwind, and whatever deployment story is fastest — usually Vercel. For data I reach for Postgres with Drizzle or Prisma. I keep the stack boring on purpose because complexity is a tax. The interesting decisions are product decisions, not tech decisions.",
+  },
+  {
+    question: "How do you think about performance vs. developer experience?",
+    answer:
+      "Performance is a feature the user feels but can't name — they just know the product feels alive or sluggish. I track Core Web Vitals on everything I ship seriously. DX matters too, but a fast dev experience that ships a slow product is backwards. I've spent real time on CLS fixes and bundle audits, and it pays off.",
+  },
+  {
     question: "What makes a good designer, in your opinion?",
     answer:
-      "Someone who understands the problem before reaching for a visual solution. Good design isn't just beautiful — it has to be legible, useful, and honest about who it's for.",
+      "Understanding the purpose, the meaning, and the people they're designing for. The design can look incredible but if the audience doesn't get it, the designer hasn't done their job. Good design disappears — you only notice it when it's missing.",
   },
   {
-    question: "What do you do when you are not designing?",
+    question: "What do you do when you are not coding or designing?",
     answer:
-      "You'll find me cooking Chinese food, playing Animal Crossing, or taking long walks through Brooklyn with too many podcasts queued. I also spend way too much time perfecting my playlists.",
+      "I have a pretty disciplined lifestyle — you'll catch me in the gym, cooking, listening to music obsessively, or making music of my own. I also run a tight rotation of shows and films. The creative work and the rest of life feed each other more than people think.",
   },
   {
-    question:
-      "There is skill, and there's talent. What is a natural talent you've always had?",
+    question: "There is skill, and there's talent. What is a natural talent you've always had?",
     answer:
-      "Music and rhythm. I've always been able to pick up beats quickly, feel the structure of a song, and find the groove. It bleeds into how I think about design — timing, flow, pacing.",
-  },
-  {
-    question:
-      "If you could close your eyes and transport yourself anywhere at this moment, where would you go?",
-    answer:
-      "Australia or Hawaii — somewhere with ridiculous sunsets, good waves, and a slower pace. Then maybe a bookstore in Tokyo to round out the fantasy.",
-  },
-  {
-    question: "Do you have a favorite thing to do?",
-    answer:
-      "Collecting references I'll never use and organizing them anyway. Also: film nights with friends where everyone argues about the ending.",
-  },
-  {
-    question: "What are you into recently?",
-    answer:
-      "Animal Crossing has consumed too much of my life. Also deep into Chinese cooking — working through regional recipes and trying to understand the technique behind each dish.",
+      "Music and rhythm. I've always been able to feel the structure of a song — the tension, the release, where a beat wants to go. It bleeds directly into how I think about UI: timing, flow, the pacing of an interaction. Animation feels like music to me.",
   },
   {
     question: "What keeps you up at night?",
     answer:
-      "AI and its ethics — exciting for prototyping, deeply concerning when it comes to bias, authorship, and what we lose when we skip the thinking. I try to use it as a thinking partner, not a replacement for judgment.",
+      "AI moving faster than our ability to reason about it. I use it constantly — it's genuinely changed how I prototype and think. But the questions around authorship, bias, and what we lose when we stop struggling through hard problems — those stay with me. I try to use AI as a thinking partner, not a replacement for judgment.",
   },
 ];

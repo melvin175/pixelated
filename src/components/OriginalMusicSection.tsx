@@ -52,6 +52,21 @@ const DEFAULT_META = {
   gradient: ["#2d3436", "#636e72"] as [string, string],
 };
 
+/* Curated set of releases to feature (in display order).
+   Add "Fill The Plate" here if you want to extend the row. */
+const FEATURED_TITLES = [
+  "SERVED",
+  "Starting To See Through",
+  "Push Myself To Live",
+  "SOS Freestyle",
+];
+
+function curateReleases(releases: Release[]): Release[] {
+  return FEATURED_TITLES.map((title) =>
+    releases.find((release) => release.title === title),
+  ).filter((release): release is Release => Boolean(release));
+}
+
 /* Fallback releases shown when Spotify API isn't configured */
 const FALLBACK_RELEASES: Release[] = [
   { id: "served", title: "SERVED", type: "EP", year: "2025", imageUrl: null, href: "https://open.spotify.com/artist/0rjIdD6rhjXgD9UsDAqSrs" },
@@ -108,6 +123,67 @@ function Disc({ imageUrl, gradient }: { imageUrl: string | null; gradient: [stri
   );
 }
 
+function MarqueePhrase({ phrase, index }: { phrase: string; index: number }) {
+  const [hovered, setHovered] = useState(false);
+  const [angle, setAngle] = useState(90);
+
+  return (
+    <span
+      key={index}
+      className="font-display shrink-0 cursor-default px-10 font-black uppercase leading-none"
+      style={{
+        fontSize: "clamp(3.5rem, 9vw, 8rem)",
+        ...(hovered
+          ? {
+              background: `linear-gradient(${angle}deg, #ffd177, #ffc09f, #ffe5b4, #a8c5e8, #ffb347, #ffd8b1, #a8c5e8, #ffc09f, #ffd177)`,
+              backgroundSize: "300% auto",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              animation: "fluid-gradient 5s linear infinite",
+            }
+          : {
+              color: "rgba(255,255,255,0.70)",
+              WebkitTextFillColor: "rgba(255,255,255,0.70)",
+            }),
+      }}
+      onMouseEnter={() => { setAngle(Math.floor(Math.random() * 360)); setHovered(true); }}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {phrase}
+    </span>
+  );
+}
+
+function MarqueeStatement() {
+  const phrases = ["I move.", "I make.", "I listen."];
+
+  return (
+    <div className="overflow-hidden border-t border-white/10 py-5">
+      <style>{`
+        @keyframes fluid-gradient {
+          0%   { background-position: 0% center; }
+          100% { background-position: 300% center; }
+        }
+        .statement-track {
+          display: flex;
+          white-space: nowrap;
+          animation: marquee 18s linear infinite;
+          will-change: transform;
+          width: max-content;
+        }
+      `}</style>
+      <div className="statement-track">
+        {Array.from({ length: 3 }, (_, gi) =>
+          phrases.map((phrase, pi) => (
+            <MarqueePhrase key={`${gi}-${pi}`} phrase={phrase} index={gi * 3 + pi} />
+          ))
+        )}
+      </div>
+    </div>
+  );
+}
+
 function ReleaseCard({ release }: { release: Release }) {
   const meta = RELEASE_META[release.title] ?? DEFAULT_META;
 
@@ -139,26 +215,31 @@ function ReleaseCard({ release }: { release: Release }) {
 }
 
 export function OriginalMusicSection() {
-  const [releases, setReleases] = useState<Release[]>(FALLBACK_RELEASES);
+  const [releases, setReleases] = useState<Release[]>(
+    curateReleases(FALLBACK_RELEASES),
+  );
 
   useEffect(() => {
     fetch("/api/spotify/releases")
       .then((r) => r.json())
       .then((data) => {
         if (data.configured && data.releases.length > 0) {
-          setReleases(data.releases);
+          const curated = curateReleases(data.releases);
+          if (curated.length > 0) {
+            setReleases(curated);
+          }
         }
       })
       .catch(() => {});
   }, []);
 
   return (
-    <section className="border-t border-black bg-[#0d0d0d] section-padding">
-      <div className="site-container-wide">
+    <section className="border-t border-black bg-[#0d0d0d]">
+      <div className="site-container-wide section-padding">
         {/* Heading */}
         <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <h2 className="font-display text-[clamp(2.5rem,6vw,4.5rem)] font-normal uppercase leading-[0.95] tracking-[0.02em] text-white">
-            I go by Melvin175
+            I also go by M7VN
           </h2>
           <a
             href="https://open.spotify.com/artist/0rjIdD6rhjXgD9UsDAqSrs"
@@ -172,13 +253,13 @@ export function OriginalMusicSection() {
               <path d="M6.5 12c3.5-2 8.5-2.2 12-0.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
               <path d="M6 8.5c4-2.2 10-2.4 14-0.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
-            Melvin175 on Spotify
+            M7VN on Spotify
           </a>
         </div>
 
         {/* Artist bio */}
         <p className="mb-12 max-w-2xl text-[15px] leading-[1.75] text-white/50">
-          Melvin, an emerging artist from India, inspired by a diverse range of musical
+          An emerging artist from India, inspired by a diverse range of musical
           influences that ignited a passion for creating his own sound. What began as a
           passion for production grew into a full exploration of songwriting, mixing,
           mastering. His work reflects a personal journey of growth and ambition, with the
@@ -193,6 +274,9 @@ export function OriginalMusicSection() {
           ))}
         </div>
       </div>
+
+      {/* Statement marquee — below albums */}
+      <MarqueeStatement />
     </section>
   );
 }

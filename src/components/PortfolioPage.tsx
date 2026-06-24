@@ -20,8 +20,11 @@ import { CurtainSection } from "./CurtainSection";
 import { MusicSection } from "./MusicSection";
 import { NowPlaying } from "./NowPlaying";
 import { OriginalMusicSection } from "./OriginalMusicSection";
+import { PixelFigureSection } from "./PixelFigureSection";
 import { ShowsSection } from "./ShowsSection";
+import { SessionTimer } from "./SessionTimer";
 import { SiteHeader } from "./SiteHeader";
+import { TechStackSection } from "./TechStackSection";
 import { WorkCards } from "./WorkCards";
 
 export function PortfolioPage() {
@@ -31,6 +34,7 @@ export function PortfolioPage() {
     <>
       <SiteHeader viewMode={viewMode} onViewChange={setViewMode} />
       <NowPlaying />
+      <SessionTimer />
       <EmailCopy email={site.email} />
 
       <main>
@@ -41,11 +45,13 @@ export function PortfolioPage() {
 
         <CaseStudies mode={viewMode} />
 
+        <TechStackSection />
+
         {/* Work history */}
         <section id="work" className="section-padding border-t border-black">
           <div className="site-container-wide">
             <ScrollReveal>
-              <SectionHeading title="I build & ship" label="Experience" />
+              <SectionHeading title="My Journey So Far" label="Experience" />
             </ScrollReveal>
             <ScrollReveal delay={100}>
               <WorkCards />
@@ -57,6 +63,8 @@ export function PortfolioPage() {
 
         <MusicSection />
 
+        <PixelFigureSection />
+
         <OriginalMusicSection />
 
         <div id="qa">
@@ -66,7 +74,7 @@ export function PortfolioPage() {
         <CurtainSection />
       </main>
 
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

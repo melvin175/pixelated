@@ -189,8 +189,10 @@ iframe {
 
 .hero-left {
   container-type: inline-size;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
   background: var(--brand-yellow);
   padding: clamp(1.5rem, 3vw, 3.5rem);
   min-width: 0;

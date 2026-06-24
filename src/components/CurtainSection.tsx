@@ -53,14 +53,14 @@ export function CurtainSection() {
         style={{ zIndex: 30 }}
       >
         <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/30">
-          Thank you for your time
+          Thanks for watching
         </p>
 
         <h2
           className="font-display uppercase leading-[0.9] tracking-tight text-white"
           style={{ fontSize: "clamp(3.5rem, 12vw, 10rem)" }}
         >
-          That&apos;s my time
+          That&apos;s a wrap
         </h2>
 
         <div className="mt-10">

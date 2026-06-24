@@ -175,13 +175,13 @@ export function MusicSection() {
     </div>
   </div>;
   return (
-    <section id="music" className="section-padding border-t border-black">
-      <div className="site-container-wide">
+    <section id="music" className="border-t border-black">
+      <div className="site-container-wide pt-16 pb-12 lg:pt-20">
         <SectionHeading title="I live for music" />
 
         {/* Featured Spotify embed */}
         {featuredPlaylist?.spotifyId && (
-          <div className="mb-10 overflow-hidden rounded-2xl">
+          <div className="mt-10 overflow-hidden rounded-2xl">
             <iframe
               src={`https://open.spotify.com/embed/playlist/${featuredPlaylist.spotifyId}?utm_source=generator&theme=0`}
               width="100%"
@@ -192,10 +192,8 @@ export function MusicSection() {
             />
           </div>
         )}
-
-        {/* Carousel */}
-        {/* {newLocal} */}
       </div>
+
     </section>
   );
 }
